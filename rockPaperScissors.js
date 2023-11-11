@@ -15,7 +15,7 @@ function bot(botEleccion){
 
     if (botEleccion == 1){
 
-     botFinal = 'piedra';
+        botFinal = 'piedra';
     }else if (botEleccion == 2 ){
         botFinal = 'papel'
     } else {
@@ -38,13 +38,13 @@ function validador(){
     usuarioEleccion = usuarioEleccion.trim().toLowerCase()
 
     if (usuarioEleccion === 'piedra'){
-         usuarioEleccion = 'piedra';
+            usuarioEleccion = 'piedra';
     } else if (usuarioEleccion === 'papel'){
-         usuarioEleccion = 'papel'
+            usuarioEleccion = 'papel'
     } else if (usuarioEleccion === 'tijeras'){
-         usuarioEleccion = 'tijeras'
+            usuarioEleccion = 'tijeras'
     } else {console.log('Incorrecto, vuelve a introducir tu eleccion.')
-    usuarioEleccion = validador();
+    return validador();
 }
 
     return usuarioEleccion;
@@ -92,9 +92,8 @@ function comparador(){
     }
 
 
-     return resultado
-
+    return resultado;
     
 };
 
-console.log(resultado);
+var resultadoDelJuego = comparador();
