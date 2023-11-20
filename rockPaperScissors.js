@@ -1,100 +1,147 @@
-console.log('hola mundo');
-
-function numeroAleatorio(min, max){
-    return Math.floor(Math.random() * (max - min + 1) + 1)
-}
-
-var botEleccion = numeroAleatorio(1,3);
-
-console.log(botEleccion);
 
 
-function bot(botEleccion){
+let usuarioGana = 0;
+let usuarioPierde = 0;
+const maxPuntuacion = 5;
 
-    var botFinal = 'algo';
+//si este cambio funciona, preguntar a victor porque antes no funcionaba
+// el bucle con una condicional usuiarioGana o pierde < 5
 
-    if (botEleccion == 1){
 
-     botFinal = 'piedra';
-    }else if (botEleccion == 2 ){
-        botFinal = 'papel'
-    } else {
-        botFinal = 'tijeras'
+const piedraBtn = document.getElementById("piedra");
+const papelBtn = document.getElementById("papel");
+const tijerasBtn = document.getElementById("tijeras")
+
+
+
+
+do{
+
+    //Eleccion del bot//
+
+    console.log('hola mundo');
+
+    function numeroAleatorio(min, max){
+        return Math.floor(Math.random() * (max - min + 1) + 1)
     }
     
-    return botFinal;
-
+    var botEleccion = numeroAleatorio(1,3);
     
+    console.log(botEleccion);
+    
+    
+    function bot(botEleccion){
+    
+        var botFinal = '';
+    
+        if (botEleccion == 1){
+    
+         botFinal = 'piedra';
+        }else if (botEleccion == 2 ){
+            botFinal = 'papel'
+        } else  {
+            botFinal = 'tijeras'
+        }
+        
+        return botFinal;
+    
+        
+    
+    }
+    
+    var eleccionDelBot = bot(botEleccion)
+    
+    console.log(eleccionDelBot);
+    
+    //Termina eleccion del bot//
 
-}
 
-var eleccionDelBot = bot(botEleccion)
+//Empiezo a recibir la eleccion del usuario//
 
-console.log(eleccionDelBot);
+usuarioEleccion ="";
 
-function validador(){
-    var usuarioEleccion = prompt('Ingresa tu eleccion, solo es valido "Piedra, Papel o Tijeras"')
+piedraBtn.addEventListener("click", () => {
+    usuarioEleccion = 'piedra';
+    console.log(usuarioEleccion);
+});
 
-    usuarioEleccion = usuarioEleccion.trim().toLowerCase()
+papelBtn.addEventListener("click", ()=>{
+    usuarioEleccion = 'papel';
+    console.log(usuarioEleccion);
+});
 
-    if (usuarioEleccion === 'piedra'){
-         usuarioEleccion = 'piedra';
-    } else if (usuarioEleccion === 'papel'){
-         usuarioEleccion = 'papel'
-    } else if (usuarioEleccion === 'tijeras'){
-         usuarioEleccion = 'tijeras'
-    } else {console.log('Incorrecto, vuelve a introducir tu eleccion.')
-    usuarioEleccion = validador();
-}
+tijerasBtn.addEventListener("click", () =>{
+    usuarioEleccion = "tijeras";
+    console.log(usuarioEleccion);
 
-    return usuarioEleccion;
-}
+});
 
-var usuarioEleccionFinal = validador();
-console.log(usuarioEleccionFinal)
+//Una vez tengo la eleccion del usuario, la comparo con la del bot//
+
 
 function comparador(){
 
     var resultado = 'resultado';
 
-    if (usuarioEleccionFinal === 'piedra' && eleccionDelBot === 'piedra' ){
+    if (usuarioEleccion === 'piedra' && eleccionDelBot === 'piedra' ){
         resultado = 'empate'
         console.log('empate')
-    } else if(usuarioEleccionFinal === 'piedra' && eleccionDelBot === 'papel'){
-        resultado = 'Pierdes'
-        console.log('Pierdes')
-    } else if(usuarioEleccionFinal === 'piedra' && eleccionDelBot === 'tijeras'){
-        resultado = 'ganaste mamaguevo'
-        console.log('ganaste mamaguevo')
-    }
-
-    else if (usuarioEleccionFinal === 'papel' && eleccionDelBot === 'piedra' ){
-        resultado = 'ganaste mamaguevo'
-        console.log('ganaste mamaguevazo')
-    } else if(usuarioEleccionFinal === 'papel' && eleccionDelBot === 'papel'){
-        resultado = 'empate'
-        console.log('empate')
-    } else if(usuarioEleccionFinal === 'papel' && eleccionDelBot === 'tijeras'){
-        resultado = 'pierdes mamaguevo'
-        console.log('pierdes mamaguevo')
-    }
-
-
-    else if (usuarioEleccionFinal === 'tijeras' && eleccionDelBot === 'piedra' ){
-        resultado = 'pierdes'
+    } else if(usuarioEleccion === 'piedra' && eleccionDelBot === 'papel'){
+        resultado = 'pierdes';
+        usuarioPierde++;
         console.log('pierdes')
-    } else if(usuarioEleccionFinal === 'tijeras' && eleccionDelBot === 'papel'){
-        resultado = 'ganas, putito'
-        console.log('ganas, putito')
-    } else if(usuarioEleccionFinal === 'tijeras' && eleccionDelBot === 'tijeras'){
-        resultado = 'empate mamaguevo'
-        console.log('empate mamaguevo')
+    } else if(usuarioEleccion === 'piedra' && eleccionDelBot === 'tijeras'){
+        resultado = 'ganaste'
+        usuarioGana ++;
+        console.log('ganaste')
+    }
+
+    else if (usuarioEleccion === 'papel' && eleccionDelBot === 'piedra' ){
+        resultado = 'ganaste'
+        usuarioGana++;
+        console.log('ganaste')
+
+    } else if(usuarioEleccion === 'papel' && eleccionDelBot === 'papel'){
+        resultado = 'empate'
+        console.log('empate')
+    } else if(usuarioEleccion === 'papel' && eleccionDelBot === 'tijeras'){
+        resultado = 'pierdes'
+        usuarioPierde++;
+        console.log('pierdes')
     }
 
 
-     return resultado
+    else if (usuarioEleccion === 'tijeras' && eleccionDelBot === 'piedra' ){
+        resultado = 'pierdes'
+        usuarioPierde++;
+        console.log('pierdes')
+    } else if(usuarioEleccion === 'tijeras' && eleccionDelBot === 'papel'){
+        resultado = 'ganaste'
+        usuarioGana++;
+        console.log('ganaste')
+    } else if(usuarioEleccion === 'tijeras' && eleccionDelBot === 'tijeras'){
+        resultado = 'empate'
+        console.log('empate')
+    }
+
+
+    var resultadoJuego = comparador();
+
+    if(resultadoJuego === "ganaste"){
+    usuarioGana++
+    }else if(resultadoJuego === "pierdes"){
+    usuarioPierde++
+    }
+
+    return resultado;
 
     
-};
+    
+}
 
-console.log(resultado);
+
+
+
+
+}while(usuarioGana < maxPuntuacion && usuarioPierde < maxPuntuacion);
+
