@@ -1,0 +1,3 @@
+- Al presionar el boton se produce la eleccion del bot
+- guardar el valor del boton en una variable para comparar posteriormente
+- 

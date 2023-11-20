@@ -1,85 +1,79 @@
-
-
 let usuarioGana = 0;
 let usuarioPierde = 0;
-const maxPuntuacion = 5;
 
 //si este cambio funciona, preguntar a victor porque antes no funcionaba
 // el bucle con una condicional usuiarioGana o pierde < 5
 
 
+/** @type {HTMLButtonElement} */
 const piedraBtn = document.getElementById("piedra");
+/** @type {HTMLButtonElement} */
 const papelBtn = document.getElementById("papel");
+/** @type {HTMLButtonElement} */
 const tijerasBtn = document.getElementById("tijeras")
 
+function bot(botEleccion){
+    
+    var botFinal = '';
 
+    if (botEleccion == 1){
 
-
-do{
-
-    //Eleccion del bot//
-
-    console.log('hola mundo');
-
-    function numeroAleatorio(min, max){
-        return Math.floor(Math.random() * (max - min + 1) + 1)
+    botFinal = 'piedra';
+    }else if (botEleccion == 2 ){
+        botFinal = 'papel'
+    } else  {
+        botFinal = 'tijeras'
     }
     
-    var botEleccion = numeroAleatorio(1,3);
+    return botFinal;
+
     
-    console.log(botEleccion);
-    
-    
-    function bot(botEleccion){
-    
-        var botFinal = '';
-    
-        if (botEleccion == 1){
-    
-         botFinal = 'piedra';
-        }else if (botEleccion == 2 ){
-            botFinal = 'papel'
-        } else  {
-            botFinal = 'tijeras'
-        }
-        
-        return botFinal;
-    
-        
-    
+
+}
+
+function validarGameOver(){
+    if(usuarioGana >= 5 || usuarioPierde >= 5){
+        alert(`El ganador: ${usuarioGana > usuarioPierde? "Usuario": "BOT"}`)
+        piedraBtn.disabled = true;
+        papelBtn.disabled = true;
+        tijerasBtn.disabled = true;
+
     }
-    
-    var eleccionDelBot = bot(botEleccion)
-    
-    console.log(eleccionDelBot);
-    
-    //Termina eleccion del bot//
+}
 
+/**
+ * @param {number} min 
+ * @param {number} max
+ */
+function numeroAleatorio(min, max){
+    return Math.floor(Math.random() * (max - min + 1) + 1)
+}
 
-//Empiezo a recibir la eleccion del usuario//
-
-usuarioEleccion ="";
+/**
+ * 
+ * @param {'piedra' | 'papel' | 'tijeras'} usuarioEleccion 
+ */
+function startGame(usuarioEleccion){
+    const botEleccion = numeroAleatorio(1,3);
+    const botFinal = bot(botEleccion);
+    comparador(usuarioEleccion, botFinal);
+    validarGameOver();
+}
 
 piedraBtn.addEventListener("click", () => {
-    usuarioEleccion = 'piedra';
-    console.log(usuarioEleccion);
+    startGame("piedra");
 });
 
 papelBtn.addEventListener("click", ()=>{
-    usuarioEleccion = 'papel';
-    console.log(usuarioEleccion);
+    startGame("papel");   
 });
 
 tijerasBtn.addEventListener("click", () =>{
-    usuarioEleccion = "tijeras";
-    console.log(usuarioEleccion);
-
+    startGame("tijeras");
 });
 
-//Una vez tengo la eleccion del usuario, la comparo con la del bot//
-
-
-function comparador(){
+    
+function comparador(usuarioEleccion, eleccionDelBot){
 
     var resultado = 'resultado';
 
@@ -125,23 +119,13 @@ function comparador(){
     }
 
 
-    var resultadoJuego = comparador();
+    var resultadoJuego = resultado;
 
     if(resultadoJuego === "ganaste"){
-    usuarioGana++
+    usuarioGana++;
     }else if(resultadoJuego === "pierdes"){
-    usuarioPierde++
+    usuarioPierde++;
     }
-
-    return resultado;
-
     
     
 }
-
-
-
-
-
-}while(usuarioGana < maxPuntuacion && usuarioPierde < maxPuntuacion);
-
